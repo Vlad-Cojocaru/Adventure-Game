@@ -1,0 +1,306 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-size: cover;
+  line-height: 170%;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: courier, monospace;
+}
+
+h1 {
+  text-align: center;
+  color: #000000;
+  font-size: 50px;
+  margin: 30px 10px 30px 10px;
+}
+
+h2 {
+  font-size: 23px;
+}
+
+p {
+  color: #000000;
+  font-size: 18px;
+  margin: 20px 10px 20px 10px;
+}
+
+img {
+  border-radius: 5px;
+  border: 3px #000000 solid;
+  margin: 10px 10px 10px 10px;
+}
+
+#noImgBorder {
+  border: 0px;
+}
+
+#noTopMargin {
+  margin-top: 0px;
+}
+
+audio {
+  margin-top: 10px;
+}
+
+button {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: black;
+  cursor: pointer;
+  margin-top: 18px;
+  padding: 5px 15px;
+  font-size: 16px;
+  text-align: center;
+  border-color: #000000;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+table {
+border: 3px #000000 solid;
+border-collapse: collapse;
+width: 100%;
+
+}
+
+td {
+  border: 2px #000000 solid;
+}
+
+input {
+  width: 40px;
+}
+
+area {
+  outline-color: white;
+  cursor: pointer;
+}
+
+.container {
+  background-color:rgba(255, 255, 255, 0.7);
+  padding: 35px;
+  border-radius: 15px;
+}
+
+#devContainer {
+  border-radius: 0px;
+  width: 300px;
+  height: 130px;
+}
+
+#musicContainer {
+  border-radius: 0px;
+  width: 300px;
+  height: 130px;
+  margin-top: 15px;
+}
+
+#statsTitle {
+  margin-top: 0px;
+}
+
+#container1 {
+  margin-top: 100px;
+  width: 930px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#container2 {
+  margin-top: 20px;
+  width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#container3 {
+  margin-top: 40px;
+  width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+}
+
+#container4 {
+  width: 1200px;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#infoContainer {
+  border-radius: 0px;
+  display: inline;
+  float: right;
+  width: 300px;
+}
+
+#infoContainer2 {
+  float: right;
+  display: inline;
+  border-radius: 0px;
+  width: 300px;
+}
+
+#container5 {
+  width: 1000px;
+  margin-top: 40px;
+  margin-right: 200px;
+  margin-bottom: 100px;
+  float: right;
+
+}
+
+#container6 {
+  width: 750px;
+  margin-top: 60px;
+  margin-left: 400px;
+}
+
+
+#container7 {
+  width: 1000px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#container8 {
+  width: 1000px;
+  margin-top: 100px;
+  margin-left: 280px;
+}
+
+#container9 {
+  position: relative;
+  width: 1000px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#container10 {
+  position: relative;
+  width: 1000px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.floatLeft {
+  float: left;
+  margin-right: 20px;
+}
+
+.floatRight {
+  float: right;
+  margin-left: 20px;
+}
+
+.zoom {
+  transition: .3s;
+}
+
+.zoom:hover {
+  transform: scale(1.1);
+}
+
+.imageButton {
+  border-radius: 5px;
+  border: 3px #000000 solid;
+  margin: 10px 10px 10px 10px;
+}
+
+.cheatButton {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);;
+}
+
+.cheatButton:hover {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.6);;
+}
+
+#selectTable table {
+  border: 0px solid;
+  width: 100%;
+}
+
+#selectTable td {
+  border: 0px;
+  text-align: center;
+}
+
+#classDescTable td {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#shopTable table {
+  width: 130px;
+}
+
+#shopTable td {
+  text-align: center;
+}
+
+#song {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  letter-spacing: 50px;
+  color: #ffffff;
+}
+
+#centerItem {
+  margin-left: 250px;
+}
+
+#centerItem2 {
+  margin-top: 20px;
+  margin-left: 190px;
+}
+
+#shootButton {
+  background-color: #7f0000;
+  color: white;
+}
+
+#imgMap {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#fixLi {
+  margin-left: 25px;
+}
+
+#outcomeText {
+  color: #7f0000;
+}
+
+#centerOutcomeText {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#theEnd {
+  font-size: 60px;
+  color: #8A2BE2;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
