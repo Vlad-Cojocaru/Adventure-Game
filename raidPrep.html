@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>The Preparation</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+
+
+  <style>
+  body {
+    background: url("images/background9.png") center center fixed;
+    background-size: cover;
+  }
+  </style>
+
+
+</head>
+
+<body>
+
+  <div class="container" id="infoContainer2">
+
+  <h1>Stats</h1>
+  <h2>Class: <h4 id="statsClass"></h4></h2>
+  <h2>Health Points: <h4 id="statsHp"></h4></h2>
+  <h2>Aptitude Points: <h4 id="statsAp"></h4></h2>
+  <h2>Items: </h2>
+
+  <div id="shopTable">
+
+  <table>
+    <tr>
+      <td id="slot1"></td>
+    </tr>
+    <tr>
+      <td id="slot2"></td>
+    </tr>
+    <tr>
+      <td id="slot3"></td>
+    </tr>
+  </table>
+
+  </div>
+
+  </div>
+
+
+  <div class="container" id="container8">
+
+  <img src="images/raidPrep.jpg" height="200" class="floatRight" alt="about to enter the dungeon">
+  <p id="story">Welcome to the final step in your journey Guardian. If you carry the 3 items needed to overcome Oryx, these being</p>
+<ul id="fixLi">
+  <li><h4>the Raid Armor</h4></li>
+  <li><h4>the Eternity's Edge Sword</h4></li>
+  <li><h4>the Void shield</h4></li>
+</ul>
+     <p>then you can now enter the dungeon that lies ahead of us. It is my job as your ghost to take care of you, so that is why I now warn you that what lays ahead is the most dangerous event that you'll ever face. The advantage we have, just like with the Arms Dealer, is that I can revive if you fail, but you must hurry either way, before it's too late. May you face your destiny and beat the Taken King Guardian, and I hope to see you on the other side.</p>
+  <div id="game">
+
+  </div>
+  <div id="noButton">
+    <button onClick="back()" name="Return"><div id="backward">Return</div></button>
+    <button onClick="proceed()" name="Next"><div id="forward">Proceed</div></button>
+  </div>
+
+</body>
+
+<script>
+
+  window.onload = function () {
+    loadStats();
+  }
+
+  function loadStats() {
+
+  upgradeModule = sessionStorage.getItem('item1');
+  enhancementCore = sessionStorage.getItem('item2');
+  ascendantShard = sessionStorage.getItem('item3');
+  swordItem = sessionStorage.getItem('swordItem');
+  shieldItem = sessionStorage.getItem('shieldItem');
+  armorItem = sessionStorage.getItem('armorItem');
+  armor = sessionStorage.getItem('armor');
+  className = sessionStorage.getItem('className');
+  health = sessionStorage.getItem('health');
+  aptitude = sessionStorage.getItem('aptitude');
+
+
+  if (swordItem == "true") {
+    document.getElementById('slot1').innerHTML = "<img src='images/sword.jpg' height='125' alt='ascendant shard'>";
+  } else if (upgradeModule == "true") {
+      document.getElementById('slot1').innerHTML = "<img src='images/upgradeModule.png' height='125' alt='upgrade module'>";
+  } else {
+      document.getElementById('slot1').innerHTML = "<br>Missing<br><br><br>";
+  }
+
+  if (shieldItem == "true") {
+    document.getElementById('slot2').innerHTML = "<img src='images/shield.jpg' height='125' alt='ascendant shard'>";
+  } else if (enhancementCore == "true") {
+    document.getElementById('slot2').innerHTML = "<img src='images/enhancementCore.jpg' height='125' alt='enhancement core'>";
+  } else {
+    document.getElementById('slot2').innerHTML = "<br>Missing<br><br><br>";
+  }
+
+  if (armorItem == "true") {
+    document.getElementById('slot3').innerHTML = "<img src='" + armor + "' height='125' alt='armor'>";
+  } else if (ascendantShard == "true") {
+      document.getElementById('slot3').innerHTML = "<img src='images/ascendantShard.png' height='125' alt='ascendant shard'>";
+
+  } else {
+      document.getElementById('slot3').innerHTML = "<br>Missing<br><br><br>";
+  }
+
+  document.getElementById('statsClass').innerHTML = className;
+  document.getElementById('statsHp').innerHTML = health;
+  document.getElementById('statsAp').innerHTML = aptitude;
+  }
+
+
+  function back() {
+    location = 'options.html';
+  }
+
+  function proceed() {
+    swordItem = sessionStorage.getItem('swordItem');
+    shieldItem = sessionStorage.getItem('shieldItem');
+    armorItem = sessionStorage.getItem('armorItem');
+
+    if (swordItem == "true" && shieldItem == "true" && armorItem == "true") {
+      location = 'theRaid.html';
+    } else {
+      document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Return'><div id='backward'>Return</div></button>"
+      document.getElementById('game').innerHTML = "<h4>*You Are Not In Possesion of All Three Required Items*</h4>"
+      document.getElementById('game').style.color = "#ff0000";
+    }
+}
+
+</script>
+
+</html>

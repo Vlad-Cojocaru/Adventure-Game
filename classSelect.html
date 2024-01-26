@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+
+  <title>Class Select</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+<style>
+  body {
+    background: url("images/background2.jpg") center center fixed;
+    background-size: cover;
+  }
+</style>
+
+<script>
+
+  // window.onload = function () {
+  //    fromStorage();
+  // }
+
+
+  var stored = false;
+
+  function collectData(className, classAttr, classDesc, classImg, health, aptitude, armor) {
+
+  document.getElementById('name').innerHTML = "<h3>" + className + "</h3>";
+  document.getElementById('attributes').innerHTML = classAttr;
+  document.getElementById('description').innerHTML = classDesc;
+  document.getElementById('image').innerHTML = "<img src='"  + classImg +  "' height='100' alt='class logo'>";
+  document.getElementById('statsClass').innerHTML = className;
+  document.getElementById('statsHp').innerHTML = health;
+  document.getElementById('statsAp').innerHTML = aptitude;
+
+/*
+we save in "<titan>_health" the value of <health>
+*/
+  sessionStorage.setItem('className', className);
+  sessionStorage.setItem('health', health);
+  sessionStorage.setItem('aptitude', aptitude);
+  sessionStorage.setItem('armor', armor)
+
+  stored = true;
+
+  return false;
+  }
+
+  function proceed() {
+
+    if (stored == true) {
+      location = "options.html";
+    } else {
+      //alert("please select a class before proceeding");
+      document.getElementById('errorMessage').innerHTML = "<h5>*Please Select A Class Before Proceeding*</h5>";
+      document.getElementById('errorMessage').style.color = "#ff0000";
+    }
+    return false;
+}
+
+  function back() {
+    location = "start.html";
+    return false;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="container" id="infoContainer">
+
+<h1>Stats</h1>
+<h2>Class: <h4 id="statsClass"></h4></h2>
+<h2>Health Points: <h4 id="statsHp"></h4></h2>
+<h2>Aptitude Points: <h4 id="statsAp"></h4></h2>
+<p>*This stat box will be displayed when you are completing the quests</p>
+
+</div>
+
+
+  <div class="container" id="container2">
+
+    <h1>Class Select</h1>
+
+    <p>To begin, please select a class Guardian. Each class is unique in its own way, with different health, odds of winning fights, appearances, and armor sets available for each one. The higher the aptitude, the easier it will be to complete the quests. The higher the health, the easier it will be to defeat Oryx in your final battle. Click each image to view the class description, and lock it in when you have made your decision.</p>
+
+<div id="selectTable">
+
+<table>
+  <tr>
+
+    <td><img onClick="collectData('Titan','<b>Health</b> - 13 hp (health points)<br><b>Aptitude</b> - 7 ap (Aptitude points)','As a Titan, you are a part of the City - in a way no Warlock or Hunter could understand. The dream of the City rests upon our shoulders.','images/titanLogo.png','13','7','images/titanArmorSet.png')" src="images/titanClassSelect.jpg" height="300" alt="Titan Class Select" class="zoom" id="imgFeature"></td>
+
+    <td><img onClick="collectData('Warlock','<b>Health</b> - 10 hp (health points)<br><b>Aptitude</b> - 10 ap (Aptitude points)','Only Warlocks understand true power. True power lies in knowledge. In understanding. Power channeled, not controlled.','images/warlockLogo.jpg','10','10','images/warlockArmorSet.png')" src="images/warlockClassSelect.jpg" height="300" alt="Warlock Class Select" class="zoom" id="imgFeature"></td>
+
+    <td><img onClick="collectData('Hunter','<b>Health</b> - 8 hp (health points)<br><b>Aptitude</b> - 12 ap (aptitude points)','Being a Hunter is all about where you belong. The Warlocks have their libraries, the Titans have their walls...But Hunters belong in the wilds.','images/hunterLogo.png','8','12','images/hunterArmorSet.png')" src="images/hunterClassSelect.jpg" height="300" alt="Hunter Class Select" class="zoom" id="imgFeature"></td>
+
+  </tr>
+
+</table>
+
+</div>
+
+<h2 id="errorMessage"></h2>
+
+  </div>
+
+  <div class="container" id="container3">
+
+    <table id="classDescTable">
+      <tr>
+        <td id="name"><br><br><br><br></td>
+        <td id="attributes"><br><br><br><br></td>
+        <td id="description"><br><br><br><br></td>
+        <td id="image"><br><br><br><br></td>
+    </table>
+
+    <button onClick="back()" value="Return">Return</button>
+    <button onClick="proceed()" value="Proceed">Proceed</button>
+
+  </div>
+
+</body>
+
+</html>

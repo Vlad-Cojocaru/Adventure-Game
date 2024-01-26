@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+
+  <title>Savathun's Song</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+<style>
+  body {
+    background: url("images/savathunClosed.jpg") center center fixed;
+    background-size: cover;
+  }
+</style>
+
+
+
+</head>
+
+<body>
+
+  <div class="container" id="musicContainer">
+  <h2>Music Controls</h2>
+    <audio controls style='width: 180px; height: 30px;'>
+      <source src="music/soundtrack.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="container" id="infoContainer2">
+
+  <h1>Stats</h1>
+  <h2>Class: <h4 id="statsClass"></h4></h2>
+  <h2>Health Points: <h4 id="statsHp"></h4></h2>
+  <h2>Aptitude Points: <h4 id="statsAp"></h4></h2>
+  <h2>Items: </h2>
+
+  <div id="shopTable">
+
+  <table>
+    <tr>
+      <td id="slot1"></td>
+    </tr>
+    <tr>
+      <td id="slot2"></td>
+    </tr>
+    <tr>
+      <td id="slot3"></td>
+    </tr>
+  </table>
+
+  </div>
+
+  </div>
+
+<div class="container" id="container6">
+
+<p id="story"></p>
+
+<p id="game"></p>
+
+<div id="noButton">
+  <button onClick="back()" name="Return"><div id="backward"></div></button>
+  <button onClick="next()" name="Next"><div id="forward"></div></button>
+</div>
+
+<p id="hint"></p>
+
+</div>
+
+
+</body>
+
+<script>
+
+  var reward = "images/upgradeModule.png";
+  var maxNum = 0;
+  var minNum = 0;
+
+  var txtNumber = 0;
+  var notes = ["a","b","c","d","e","f","g"];
+  var notesChallenge = [];
+
+  aptitude = sessionStorage.getItem('aptitude');
+
+  window.onload = function () {
+    rewriteTxt();
+    loadStats();
+    checkReturn();
+  }
+
+  function checkReturn() {
+  var itemValue = sessionStorage.getItem('item1')
+  if (itemValue == "true") {
+    document.getElementById('story').innerHTML = "It seems you've already acquired the item gifted for the completion of this quest.";
+    document.getElementById('backward').innerHTML = "Return";
+    document .getElementById('forward').innerHTML = "Bypass";
+    document.getElementById('infoContainer2').style.display = "none";
+  }
+}
+
+  function loadStats() {
+
+  upgradeModule = sessionStorage.getItem('item1');
+  enhancementCore = sessionStorage.getItem('item2');
+  ascendantShard = sessionStorage.getItem('item3');
+  swordItem = sessionStorage.getItem('swordItem');
+  shieldItem = sessionStorage.getItem('shieldItem');
+  armorItem = sessionStorage.getItem('armorItem');
+  armor = sessionStorage.getItem('armor');
+  className = sessionStorage.getItem('className');
+  health = sessionStorage.getItem('health');
+
+
+  if (swordItem == "true") {
+    document.getElementById('slot1').innerHTML = "<img src='images/sword.jpg' height='125' alt='ascendant shard'>";
+  } else if (upgradeModule == "true") {
+      document.getElementById('slot1').innerHTML = "<img src='images/upgradeModule.png' height='125' alt='upgrade module'>";
+  } else {
+      document.getElementById('slot1').innerHTML = "<br>Missing<br><br><br>";
+  }
+
+  if (shieldItem == "true") {
+    document.getElementById('slot2').innerHTML = "<img src='images/shield.jpg' height='125' alt='ascendant shard'>";
+  } else if (enhancementCore == "true") {
+    document.getElementById('slot2').innerHTML = "<img src='images/enhancementCore.jpg' height='125' alt='enhancement core'>";
+  } else {
+    document.getElementById('slot2').innerHTML = "<br>Missing<br><br><br>";
+  }
+
+  if (armorItem == "true") {
+    document.getElementById('slot3').innerHTML = "<img src='" + armor + "' height='125' alt='armor'>";
+  } else if (ascendantShard == "true") {
+      document.getElementById('slot3').innerHTML = "<img src='images/ascendantShard.png' height='125' alt='ascendant shard'>";
+
+  } else {
+      document.getElementById('slot3').innerHTML = "<br>Missing<br><br><br>";
+  }
+
+  document.getElementById('statsClass').innerHTML = className;
+  document.getElementById('statsHp').innerHTML = health;
+  document.getElementById('statsAp').innerHTML = aptitude;
+
+}
+
+  function back() {
+    if (txtNumber == 6 || txtNumber == 0) {
+      location = "quests.html";
+    } else {
+      txtNumber--;
+      rewriteTxt();
+    }
+    return false;
+}
+
+  function rewriteTxt() {
+
+    if (txtNumber == 0) {
+        document.getElementById('story').innerHTML = "Okay Guardian, be careful, we're treading in dangerous waters here. Once you see that eye open up, and hear Savathun start singing, make sure you memorize those notes. Once he stops, you'll need recite the song note for note, otherwise we're in big trouble and you won't get that treasured Upgrade Module that you need.";
+        document.getElementById('backward').innerHTML = "Return";
+        document.getElementById('forward').innerHTML = "Next";
+    } else if (txtNumber == 1) {
+        document.getElementById('story').innerHTML = "Oh no, here we go... Keep alert Guardian, the eye is opening! Make sure you remember those notes.";
+        document.getElementById('backward').innerHTML = "Prev";
+        document.getElementById('forward').innerHTML = "Next";
+    } else if (txtNumber == 2) {
+        document.getElementById('story').innerHTML = "When you think you've memorized the notes click Proceed to try your luck at reciting the song:";
+        document.getElementById('backward').innerHTML = "Prev";
+        document.getElementById('forward').innerHTML = "Proceed";
+    } else if (txtNumber == 3) {
+        document.body.style.background = "url('images/savathunsSong.jpg') center center fixed";
+        document.body.style.backgroundSize = "cover";
+        document.getElementById('game').innerHTML = getNotes();
+    } else if (txtNumber == 4) {
+        document.getElementById('story').innerHTML = "<p>Now enter the notes and click check when you think you have them right:</p>";
+        document.getElementById('game').innerHTML = ("<form name='enterNotes' method='post' onSubmit'return result()'>" + inputAmount() + "</form>");
+        document.getElementById('noButton').innerHTML = "<button onClick='next()' name='Next'><div id='forward'></div>Check</button>";
+        //document.getElementById('hint').innerHTML = "Hint: " + notesChallenge;
+    } else if (txtNumber == 5) {
+      var correct = true;
+
+      for (var i = minNum; i <= maxNum; i++) {
+        var elementId = 'noteInput' + i;
+        var required = notesChallenge[i];
+        var typed = document.getElementById(elementId).value;
+        if (required != typed.trim() ) {
+          document.getElementById('story').innerHTML = "Oh no, you messed it up, keep trying till you get that item Guardian.";
+          document.getElementById('game').innerHTML = "";
+          document.getElementById('noButton').innerHTML = "<button onClick='restart()' name='Next'><div id='forward'></div>Restart</button>";
+          correct = false;
+          break;
+        }
+      }
+
+      if(correct) {
+        document.getElementById('story').innerHTML = "<p>Congratulations, you recited the song perfectly! Now you can collect your reward, the Upgrade Module.</p><img src='" + reward + "' id='centerItem' height='125' alt='upgrade module'>";
+        document.getElementById('game').innerHTML = "";
+        document.getElementById('noButton').innerHTML = "<button onClick='next()' name='Collect'>Collect</button>";
+
+        sessionStorage.setItem('item1', true);
+      }
+
+    } else if (txtNumber == 6) {
+      document.getElementById('slot1').innerHTML = "<img src='" + reward + "' height='125' alt='upgrade module'>";
+      document.getElementById('story').innerHTML = "Congratulations, you recited the song perfectly! Now you can collect your reward, the Upgrade Module."
+      document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Back'>Back to Quests</button>";
+
+    }
+}
+
+  function next() {
+    txtNumber++;
+    rewriteTxt();
+  }
+
+  function restart() {
+    document.getElementById('story').innerHTML = "When you think you've memorized the notes click Proceed to try your luck at reciting the song:"
+    document.getElementById('noButton').innerHTML = "<button onClick='next()' name='Next'><div id='forward'></div>Proceed</button>";
+    txtNumber = 3;
+    rewriteTxt();
+  }
+
+    function getNotes() {
+      notesChallenge.length = 0;
+      maxNum = 10 - (Math.floor(aptitude/2)) - 1;
+      minNum = 0
+
+      var notesList = "<h3 id='song'>";
+
+      for (var i = minNum; i <= maxNum; i++) {
+
+          randomNumber = Math.floor(Math.random() * notes.length);
+          notesList = notesList + "" + notes[randomNumber] + "";
+
+          notesChallenge.push(notes[randomNumber]);
+      }
+      notesList = notesList + "</h3>";
+      return notesList;
+  }
+
+  function inputAmount() {
+    var tableBody = "<div id='selectTable'><table><tr>";
+
+    for (var i = minNum; i <= maxNum; i++) {
+      tableBody = tableBody + "<td><input type='text' name='noteInput" + i + "' id='noteInput" + i + "'/></td>";
+    }
+
+    tableBody = tableBody + "</tr></table></div>";
+    return tableBody;
+}
+
+</script>
+
+</html>

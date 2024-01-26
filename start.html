@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+
+  <title>Starting Page</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+<style>
+  body {
+    background: url("images/background1.jpg") center center fixed;
+    background-size: cover;
+  }
+</style>
+
+<script>
+
+  function proceed() {
+    location = "classSelect.html";
+
+  }
+
+  function rules() {
+    location = "rules.html";
+  }
+
+</script>
+
+
+</head>
+
+<body>
+
+  <div class="container" id="container1">
+
+    <h1>Facing Your Destiny</h1>
+
+    <img src="images/ghost.png" height="250" alt="ghost" class="floatLeft">
+
+    <p>Hey there Guardian! I am what’s known as a Ghost, and will guiding you through your journey of taking down Oryx, the Taken King. Yep, you heard me right, one of the most powerful beings known to you guardians, born out of pure darkness, the sovereign of the Osmium Throne, and the master of the Taken. You, are after all, the Chosen One, and so therefore you must partake in this journey and face your destiny...</p>
+
+    <p class="floatLeft">Click a button to read the rules or proceed Guardian:</p>
+
+    <button onClick="rules()" value="Rules">Rules</button>
+    <button onClick="proceed()" value="Proceed">Proceed</button>
+
+  </div>
+
+</body>
+
+</html>

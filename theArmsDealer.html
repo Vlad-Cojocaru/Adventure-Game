@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+  
+  <title>The Arms Dealer</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+<style>
+  body {
+    background: url("images/background7.jpg") center center fixed;
+    background-size: cover;
+  }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container" id="musicContainer">
+  <h2>Music Controls</h2>
+    <audio controls style='width: 180px; height: 30px;'>
+      <source src="music/soundtrack.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="container" id="infoContainer2">
+
+  <h1>Stats</h1>
+  <h2>Class: <h4 id="statsClass"></h4></h2>
+  <h2>Health Points: <h4 id="statsHp"></h4></h2>
+  <h2>Aptitude Points: <h4 id="statsAp"></h4></h2>
+  <h2>Items: </h2>
+
+  <div id="shopTable">
+
+  <table>
+    <tr>
+      <td id="slot1"></td>
+    </tr>
+    <tr>
+      <td id="slot2"></td>
+    </tr>
+    <tr>
+      <td id="slot3"></td>
+    </tr>
+  </table>
+
+  </div>
+
+  </div>
+
+  <div class="container" id="container6">
+
+  <p id="story"></p>
+  <div id="images"></div>
+
+  <div id="noButton">
+  </div>
+
+
+</body>
+
+  <script>
+
+    var reward = "images/enhancementCore.jpg";
+    var bracusZahn = "images/bracusZahn.jpg";
+    var txtNumber = 0;
+
+    var aptitude12Barrel = [1,0,0,0,0,0];
+    var aptitude10Barrel = [1,0,0,0,0,0];
+    var aptitude07Barrel = [1,0,0,0,0,0];
+
+    var armsDealer12Barrel = [1,1,1,0,0,0];
+    var armsDealer10Barrel = [1,1,0,0,0,0];
+    var armsDealer07Barrel = [1,0,0,0,0,0];
+
+    var aptitude = sessionStorage.getItem('aptitude');
+
+    var barrelLength = 6;
+
+    window.onload = function () {
+      rewriteTxt();
+      checkReturn();
+      loadStats();
+    }
+
+    function checkReturn() {
+    var itemValue = sessionStorage.getItem('item2')
+    if (itemValue == "true") {
+      document.getElementById('story').innerHTML = "It seems you've already acquired the item gifted for the completion of this quest.";
+        document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Return'><div id='backward'>Return</div></button> <button onClick='next()' name='Next'><div id='forward'>Bypass</div></button>"
+      document.getElementById('infoContainer2').style.display = "none";
+    }
+  }
+
+    function loadStats() {
+
+    upgradeModule = sessionStorage.getItem('item1');
+    enhancementCore = sessionStorage.getItem('item2');
+    ascendantShard = sessionStorage.getItem('item3');
+    swordItem = sessionStorage.getItem('swordItem');
+    shieldItem = sessionStorage.getItem('shieldItem');
+    armorItem = sessionStorage.getItem('armorItem');
+    armor = sessionStorage.getItem('armor');
+    className = sessionStorage.getItem('className');
+    health = sessionStorage.getItem('health');
+
+
+    if (swordItem == "true") {
+      document.getElementById('slot1').innerHTML = "<img src='images/sword.jpg' height='125' alt='ascendant shard'>";
+    } else if (upgradeModule == "true") {
+        document.getElementById('slot1').innerHTML = "<img src='images/upgradeModule.png' height='125' alt='upgrade module'>";
+    } else {
+        document.getElementById('slot1').innerHTML = "<br>Missing<br><br><br>";
+    }
+
+    if (shieldItem == "true") {
+      document.getElementById('slot2').innerHTML = "<img src='images/shield.jpg' height='125' alt='ascendant shard'>";
+    } else if (enhancementCore == "true") {
+      document.getElementById('slot2').innerHTML = "<img src='images/enhancementCore.jpg' height='125' alt='enhancement core'>";
+    } else {
+      document.getElementById('slot2').innerHTML = "<br>Missing<br><br><br>";
+    }
+
+    if (armorItem == "true") {
+      document.getElementById('slot3').innerHTML = "<img src='" + armor + "' height='125' alt='armor'>";
+    } else if (ascendantShard == "true") {
+        document.getElementById('slot3').innerHTML = "<img src='images/ascendantShard.png' height='125' alt='ascendant shard'>";
+
+    } else {
+        document.getElementById('slot3').innerHTML = "<br>Missing<br><br><br>";
+    }
+
+    document.getElementById('statsClass').innerHTML = className;
+    document.getElementById('statsHp').innerHTML = health;
+    document.getElementById('statsAp').innerHTML = aptitude;
+  }
+
+  function userRevolverImage() {
+    return "images/1Bullet.png";
+}
+
+  function dealerRevolverImage() {
+    if (aptitude == "7") {
+      return "images/1Bullet.png";
+    } else if (aptitude == "10") {
+        return "images/2Bullets.png";
+    } else if (aptitude == "12") {
+        return "images/3Bullets.png";
+    }
+}
+
+  function restart() {
+    document.getElementById('story').innerHTML = "Try again"
+    document.getElementById('noButton').innerHTML = "<button onClick='next()' name='Next'><div id='forward'></div>Proceed</button>";
+    txtNumber = 3;
+    rewriteTxt();
+  }
+
+  function back() {
+    if (txtNumber == 5 || txtNumber == 0) {
+      location = "quests.html";
+    } else {
+      txtNumber--;
+      rewriteTxt();
+    }
+    return false;
+}
+
+  function userIsDead() {
+    document.getElementById('story').innerHTML = "<h3>*POW</h3><br>Oh no, look what you've done Guardian, you've gotten yourself killed. It's okay though, I can revive you so you can go again.";
+    document.getElementById('story').style.color = "#000000";
+    document.getElementById('noButton').innerHTML = "<button onClick='restart()' name='Next'><div id='forward'>Revive</div></button>";
+  }
+
+  function dealerIsDead() {
+    document.getElementById('story').innerHTML = "<h2>*POW</h2><br>The Arms Dealer killed himself! You win Guardian, and there in his armor pouch is the Enhancement Core. Grab it and let's get out of here.";
+    document.getElementById('story').style.color = "#000000";
+    document.getElementById('images').innerHTML = "<img src='" + reward + "' id='centerItem' height='125' alt='Enhancement Core'>"
+    document.getElementById('noButton').style.display = "inline-block";
+    document.getElementById('noButton').innerHTML = "<button onClick='next()' name='Grab'>Grab</button>";
+
+  }
+
+  function shoot() {
+    document.getElementById('story').innerHTML = "<h3>*POW</h3>";
+    randomNumber = Math.floor(Math.random() * barrelLength);
+    if (aptitude == "12" && aptitude12Barrel[randomNumber] == 1) {
+      userIsDead();
+    } else if (aptitude == "10" && aptitude10Barrel[randomNumber] == 1) {
+      userIsDead();
+    } else if (aptitude == "7" && aptitude07Barrel[randomNumber] == 1) {
+      userIsDead();
+    } else {
+      document.getElementById('story').innerHTML = "<h3>*POW</h3><br>You are very lucky indeed. Now my turn...";
+      document.getElementById('story').style.color = "#7f0000";
+      document.getElementById('noButton').style.display = "none";
+
+      setTimeout(() => {dealerShoots();}, 3000);
+    }
+}
+
+  function dealerShoots() {
+    randomNumber = Math.floor(Math.random() * barrelLength);
+    if (aptitude == "12" && armsDealer12Barrel[randomNumber] == 1) {
+      dealerIsDead();
+    } else if (aptitude == "10" && armsDealer10Barrel[randomNumber] == 1) {
+      dealerIsDead();
+    } else if (aptitude == "7" && armsDealer07Barrel[randomNumber] == 1) {
+      dealerIsDead();
+    } else {
+      document.getElementById('story').innerHTML = "<h2>*POW</h2><br>Oh well... I guess I am lucky as well. Now it's your turn again. Shoot whenever you're ready Guardian...";
+      document.getElementById('story').style.color = "#7f0000";
+      document.getElementById('noButton').style.display = "inline-block";
+      document.getElementById('noButton').innerHTML = "<button onClick='shoot()' id='shootButton' name='Shoot'><div>Shoot!</div></button>"
+
+    }
+  }
+
+  function rewriteTxt() {
+
+    if (txtNumber == 0) {
+        document.getElementById('story').innerHTML = "We've arrived Guardian. This is where you meet Brackus Zahn, otherwise known as the Arms Dealer of the Red Legion, the most fearsome army out there. This guy's gonna challenge you to a game of good old Russian Roulette. They say he's never lost which should be true seeing as he's still alive...";
+        document.getElementById('story').style.color = "#000000";
+        document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Return'><div id='backward'>Return</div></button> <button onClick='next()' name='Next'><div id='forward'>Next</div></button>"
+
+    } else if (txtNumber == 1) {
+        document.getElementById('story').innerHTML = "There he is Guardian. Approach him carefully. Hopefully you know what you're doing but keep in mind you can use your magic to generate multiple bullets in his gun to increase the odds of you winning. I can also always resurrect you if you die. Good Luck!";
+        document.getElementById('story').style.color = "#000000";
+        document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Return'><div id='backward'>Prev</div></button> <button onClick='next()' name='Next'><div id='forward'>Approach</div></button>"
+    } else if (txtNumber == 2) {
+        document.getElementById('story').innerHTML = "<img src='" + bracusZahn + "' class='floatRight' id='noTopMargin' height='300' alt='Bracus Zahn'>" + "Welcome Guardian, to the game that will quite literally, determine the outcome of your life... if you live or die ahahahah...";
+        document.getElementById('story').style.color = "#7f0000";
+        document.getElementById('images').innerHTML = "<pre>";
+        document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Return'>Prev</button> <button onClick='next()' name='Next'>Next</button>"
+        document.getElementById('container6').style.height = "400px";
+    } else if (txtNumber == 3) {
+        document.getElementById('container6').style.height = "490px";
+        document.getElementById('story').innerHTML = "<img src='" + bracusZahn + "' class='floatRight' id='noTopMargin' height='300' alt='Bracus Zahn'>" + "I hope you know how the game of Russian Roulette works Guardian. In this instance, we'll each use our own revolvers. You go first Guardian... and then wait for me to follow. Best of Luck!";
+        document.getElementById('story').style.color = "#7f0000";
+        document.getElementById('images').innerHTML = "<img src='" + userRevolverImage() + "' height='120' id='noImgBorder'> <img src='" + dealerRevolverImage() + "' height='120' id='noImgBorder'><br><h4>&nbsp;Your Cylinder&nbsp;&nbsp;&nbsp;His Cylinder</h4>"
+        document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Return'>Prev</button> <button onClick='next()' name='Next'>Proceed</button>"
+
+    } else if (txtNumber == 4) {
+        document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Return'><div id='backward'>Prev</div></button> <button onClick='shoot()' id='shootButton' name='Shoot'><div>Shoot!</div></button>"
+    } else if (txtNumber == 5) {
+      document.getElementById('story').innerHTML = "The Arms Dealer killed himself! You win Guardian, and there in his armor pouch is the Enhancement Core. Grab it and let's get out of here.";
+      document.getElementById('slot2').innerHTML = "<img src='" + reward + "' height='125' alt='Enhancement Core'>";
+      document.getElementById('images').style.display = "none";
+      document.getElementById('container6').style.height = "260px";
+      document.getElementById('noButton').innerHTML = "<button onClick='back()' name='Back'>Back to Quests</button>";
+
+      sessionStorage.setItem('item2', true);
+    }
+
+}
+
+  function next() {
+    txtNumber++;
+    rewriteTxt();
+  }
+
+  </script>
+
+</html>

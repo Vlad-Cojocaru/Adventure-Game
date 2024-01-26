@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+
+  <title>Where to Go?</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+<style>
+  body {
+    background: url("images/background3.jpg") center center fixed;
+    background-size: cover;
+  }
+</style>
+
+<script>
+
+  function proceed(url) {
+    location = url + '.html';
+  }
+
+  function back() {
+    location = "classSelect.html";
+    sessionStorage.clear();
+    return false;
+}
+
+</script>
+
+</head>
+
+<body>
+
+  <div class="container" id="container4">
+  <h1>Where to Go?</h1>
+
+  <p>Now that you have chosen your class Guardian, it is time to embark on your journey to defeating the Taken King. It's up to you to figure out how, but I will give you this hint, you can only face him once you have completed the three Quests, each of which you will need your wits and skills about you to surpass. This is necessary, since the completion of each quest will grant you something that will contribute to the final goal of facing down the greatest enemy in the history of our universe.</p>
+
+  <div id="selectTable">
+
+  <table>
+    <tr>
+
+      <td><img onClick="proceed('shop')" src="images/shop.png" height="200" alt="Titan Class Select" class="zoom"></td>
+
+      <td><img onClick="proceed('quests')" src="images/quests.jpg" height="200" alt="Warlock Class Select" class="zoom"></td>
+
+      <td><img onClick="proceed('raidPrep')" src="images/raid.jpg" height="200" alt="Hunter Class Select" class="zoom"></td>
+
+    </tr>
+    <tr>
+      <td><h2>The Armory</h2></td>
+      <td><h2>Quests</h2></td>
+      <td><h2>The Raid</h2></td>
+    </tr>
+
+  </table>
+
+  <button onClick="back()" value="Return">Return</button>
+
+  </div>
+
+
+  </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+  
+  <title>The Raid</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+<style>
+  body {
+    background: url("images/background10.jpg") center center fixed;
+    background-size: cover;
+  }
+</style>
+
+
+
+</head>
+
+<body>
+
+  <div class="container" id="container7">
+
+  <p id="story">You enter the Dungeon and there you see Oryx, the Taken King, sitting on his gold throne waiting for your. You do not wait another second but decide you engage immediately. The battle of the ages has begun!</p>
+  <div id="selectTable">
+
+    <table>
+      <tr>
+        <td><h2>Boss Health</h2></td>
+        <td><h2>Your Health</h2></td>
+      </tr>
+      <tr>
+        <td><h3 id="oryxHealth"></h3></td>
+        <td><h3 id="playerHealth"></h3></td>
+      </tr>
+      <tr>
+        <td id ="bossHealthChange"><img src='images/oryxFight.jpg' height='200' alt='Oryx, the Taken King'></td>
+        <td id ="healthChange"><img src='images/greenHealth.png' height='200' alt='good health'></td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div id="images"></div>
+  <div id="noButton">
+    <button onClick="back()" name="Return"><div id="backward">Return</div></button>
+    <button onClick="onEngage()" name="Next"><div id="forward">Engage</div></button>
+  </div>
+
+
+</body>
+
+<script>
+
+  const GAME_OVER = "Oryx kills you with one fell swoop. No Guardian is a match for the Taken King...<br><h1 id='outcomeText'>You Lose!</h1>";
+  const YOU_WIN = "Oryx stumbles, bleeding, and then falls to the ground, where he lies motionless. You have faced your destiny and defeated the Taken King!<br><h1 id='outcomeText'>You Win!</h1>";
+  var initialHealth = parseInt(sessionStorage.getItem('health'));
+  var charHealth = initialHealth + 6;
+  var bossHealth = 14;
+
+  var outcomes = [                                        // CHARACTER / BOSS
+  "You both attacked....",                                // Attack/Attack
+  "You attacked but Oryx blocked you...",                 // Attack/Block
+  "The Taken King attacked but you managed to block...",  // Block/Attack
+  "You attacked and you hit the Oryx!",                   // Attack/hit
+  "Oryx attacked and he hit you!"                         // Hit/Attack
+];
+
+window.onload = function () {
+  document.getElementById('oryxHealth').innerHTML = "<h3>" + bossHealth + "</h3>";
+  document.getElementById('playerHealth').innerHTML = "<h3>" + charHealth + "</h3>";
+}
+
+  function onEngage() {
+
+    randomNumber = Math.floor(Math.random() * outcomes.length);
+
+    var text = outcomes[randomNumber];
+    switch (randomNumber) {
+      case 0:
+          charHealth-=1;
+          bossHealth-=1;
+        break;
+      case 1:
+          charHealth-=1;
+          bossHealth-=0;
+        break;
+      case 2:
+          charHealth-=0;
+          bossHealth-=1;
+        break;
+      case 3:
+          charHealth-=0;
+          bossHealth-=4;
+        break;
+      case 4:
+          charHealth-=4;
+          bossHealth-=0;
+        break;
+    }
+
+    var ended = false;
+
+    if (charHealth <= 0) {
+      outcome = GAME_OVER;
+      charHealth = 0;
+      ended = true;
+
+    } else if (bossHealth <= 0) {
+      outcome = YOU_WIN;
+      bossHealth = 0;
+      ended = true;
+
+    } else {
+      outcome = text;
+      document.getElementById('noButton').innerHTML = "<button onClick='onEngage()'' name='Next'>Engage</button>";
+    }
+
+    redrawImages(charHealth, bossHealth);
+
+    if (ended) {
+      if (charHealth == 0) {
+        document.getElementById('noButton').innerHTML = "<button onClick='back()'' name='Return'>Retry</button>";
+      } else {
+        document.getElementById('noButton').innerHTML = "<button onClick='proceed()'' name='Next'>Proceed</button>"
+      }
+  }
+
+    document.getElementById('story').innerHTML = outcome;
+    document.getElementById('oryxHealth').innerHTML = "<h3>" + bossHealth + "</h3>";
+    document.getElementById('playerHealth').innerHTML = "<h3>" + charHealth + "</h3>";
+  }
+
+function redrawImages (user, boss) {
+  if (5 < user && user < 10) {
+    document.getElementById('healthChange').innerHTML = "<img src='images/orangeHealth.png' height='200' alt='okay health'>";
+  } else if (0 < user && user < 6) {
+      document.getElementById('healthChange').innerHTML = "<img src='images/redHealth.png' height='200' alt='not so good health'>";
+  } else if (user == 0){
+      document.getElementById('healthChange').innerHTML = "<img src='images/blackHealth.png' height='200' alt='dead health'>";
+  }
+
+  if (boss == 0){
+      document.getElementById('bossHealthChange').innerHTML = "<img src='images/oryxDeath.jpg' height='200' alt='dead health'>";
+  }
+
+}
+
+
+function back() {
+  location = "raidPrep.html";
+}
+
+function proceed() {
+  location = "theEnd.html";
+}
+
+</script>
+
+
+
+</html>

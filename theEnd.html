@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+  
+  <title>The Raid</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+</head>
+
+<body>
+
+  <video autoplay muted loop id="myVideo">
+    <source src="videos/finish.mp4" type="video/mp4">
+  </video>
+
+
+  <div class="container" id="container9">
+    <h1>The End</h1>
+  </div>
+
+  <div class="container" id="container10">
+
+  <img src="images/ghost.png" height="190" alt="ghost" class="floatLeft">
+
+  <p id="story">Good job Guardian! You did it, you beat the Taken King! Humanity is free because of you, you are our saviour!</p>
+
+  <br>
+
+  <button onClick="replay()" name="Replay">Replay</button>
+
+</body>
+
+<script>
+
+  function replay() {
+    location = "start.html"
+    sessionStorage.clear();
+  }
+
+</script>
+
+</html>

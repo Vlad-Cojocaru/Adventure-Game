@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+
+  <title>Quests</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+<style>
+  body {
+    background: url("images/background5.jpg") center center fixed;
+    background-size: cover;
+  }
+</style>
+
+<script>
+
+  function proceed(url) {
+    location = url + '.html';
+  }
+
+  function back() {
+    location = "options.html";
+    return false;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="container" id="container4">
+
+  <h1>Quests</h1>
+
+  <p>Pick your quest Guardian. All three must be beaten to be able to acquire what you need. Beware, you must keep your wits about you and be prepared for anything, for each quest will present a different challenge you must face that only once completed will reward you with the what you seek. </p>
+
+  <div id="selectTable">
+
+  <table>
+    <tr>
+
+      <td><img onClick="proceed('savathunsSong')" src="images/savathunsSong.jpg" height="180" alt="Titan Class Select" class="zoom"></td>
+
+      <td><img onClick="proceed('theArmsDealer')" src="images/theArmsDealer.jpg" height="180" alt="Warlock Class Select" class="zoom"></td>
+
+      <td><img onClick="proceed('theLakeOfShadows')" src="images/theLakeOfShadows.jpg" height="180" alt="Hunter Class Select" class="zoom"></td>
+
+    </tr>
+    <tr>
+      <td><h2>Savathun's Song</h2></td>
+      <td><h2>The Arms Dealer</h2></td>
+      <td><h2>The Lake of Shadows</h2></td>
+    </tr>
+
+  </table>
+
+  <button onClick="back()" value="Return">Return</button>
+
+
+
+</div>
+
+</body>
+
+</html>

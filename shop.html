@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Facing Your Destiny... The Game">
+	<meta name="designer" content="Vlad Cojocaru">
+	<meta name="keywords" content="html, html5, css, css3, web, design, javascript, programming, videogame, browser game, Destiny, Destiny 2, Oryx, The Taken King">
+  
+  <title>The Armory</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+
+  <style>
+    body {
+      background: url("images/background4.jpg") center center fixed;
+      background-size: cover;
+    }
+  </style>
+
+  <script>
+
+    window.onload = function () {
+      loadStats();
+    }
+
+    function loadStats() {
+
+    const ITEM_BOUGHT = "<h4>Item Bought</h4>";
+    className = sessionStorage.getItem('className');
+    health = sessionStorage.getItem('health');
+    aptitude = sessionStorage.getItem('aptitude');
+    armor = sessionStorage.getItem('armor');
+
+    upgradeModule = sessionStorage.getItem('item1');
+    enhancementCore = sessionStorage.getItem('item2');
+    ascendantShard = sessionStorage.getItem('item3');
+    swordItem = sessionStorage.getItem("swordItem");
+    shieldItem = sessionStorage.getItem("shieldItem");
+    armorItem = sessionStorage.getItem("armorItem");
+    itemMessage = sessionStorage.getItem('itemMessage');
+
+
+    if (swordItem == "true") {
+      document.getElementById('slot1').innerHTML = "<img src='images/sword.jpg' height='125' alt='ascendant shard'>";
+      document.getElementById('buyButton1').innerHTML = ITEM_BOUGHT;
+    } else if (upgradeModule == "true") {
+        document.getElementById('slot1').innerHTML = "<img src='images/upgradeModule.png' height='125' alt='upgrade module'>";
+    } else {
+        document.getElementById('slot1').innerHTML = "<br>Missing<br><br><br>";
+    }
+
+    if (shieldItem == "true") {
+      document.getElementById('slot2').innerHTML = "<img src='images/shield.jpg' height='125' alt='ascendant shard'>";
+      document.getElementById('buyButton2').innerHTML = ITEM_BOUGHT;
+    } else if (enhancementCore == "true") {
+      document.getElementById('slot2').innerHTML = "<img src='images/enhancementCore.jpg' height='125' alt='enhancement core'>";
+    } else {
+      document.getElementById('slot2').innerHTML = "<br>Missing<br><br><br>";
+    }
+
+    if (armorItem == "true") {
+      document.getElementById('slot3').innerHTML = "<img src='" + armor + "' height='125' alt='armor'>";
+      document.getElementById('buyButton3').innerHTML = ITEM_BOUGHT;
+    } else if (ascendantShard == "true") {
+        document.getElementById('slot3').innerHTML = "<img src='images/ascendantShard.png' height='125' alt='ascendant shard'>";
+
+    } else {
+        document.getElementById('slot3').innerHTML = "<br>Missing<br><br><br>";
+    }
+
+    document.getElementById('statsClass').innerHTML = className;
+    document.getElementById('statsHp').innerHTML = health;
+    document.getElementById('statsAp').innerHTML = aptitude;
+
+    document.getElementById('shopArmor').innerHTML = "<img src='" + armor + "' height='180' alt='the armor of the Raid'>";
+
+  }
+
+
+    function buySword() {
+      if (upgradeModule == "true") {
+      document.getElementById('buyButton1').innerHTML = "<h4>Item Bought</h4>";
+      sessionStorage.setItem('swordItem', true);
+      document.getElementById('slot1').innerHTML = "<img src='images/sword.jpg' height='125' alt='sword'>";
+    } else {
+      document.getElementById('buyButton1').innerHTML = "<h5>*You Do Not Have This Item*</h5>";
+      document.getElementById('buyButton1').style.color = "#ff0000";
+      }
+    }
+
+    function buyShield() {
+      if (enhancementCore == "true") {
+      document.getElementById('buyButton2').innerHTML = "<h4>Item Bought</h4>";
+      sessionStorage.setItem('shieldItem', true);
+      document.getElementById('slot2').innerHTML = "<img src='images/shield.jpg' height='125' alt='shield'>";
+      } else {
+        document.getElementById('buyButton2').innerHTML = "<h5>*You Do Not Have This Item*</h5>";
+        document.getElementById('buyButton2').style.color = "#ff0000";
+      }
+    }
+
+    function buyArmor() {
+      if (ascendantShard == "true") {
+      document.getElementById('buyButton3').innerHTML = "<h4>Item Bought</h4>";
+      sessionStorage.setItem('armorItem', true);
+      document.getElementById('slot3').innerHTML = "<img src='" + armor + "' height='125' alt='armor'>";
+      } else {
+        document.getElementById('buyButton3').innerHTML = "<h5>*You Do Not Have This Item*</h5>";
+        document.getElementById('buyButton3').style.color = "#ff0000";
+      }
+    }
+
+    function back() {
+      location = "options.html";
+      return false;
+  }
+
+    function cheat() {
+
+      if (swordItem == "true" && shieldItem == "true" && armorItem == "true") {
+        document.getElementById('cheatButton').innerHTML = "You already have what you need"
+      } else {
+          sessionStorage.setItem('item1', true);
+          sessionStorage.setItem('item2', true);
+          sessionStorage.setItem('item3', true);
+          document.getElementById('cheatButton').innerHTML = "<button onClick='revertCheat()' name='cheat' class='cheatButton'>Revert</button>"
+
+          document.getElementById('buyButton1').innerHTML = "<button onClick='buySword()'' name='buy'>Acquire</button>"
+          document.getElementById('buyButton1').style.color = "#000000";
+          document.getElementById('buyButton2').innerHTML = "<button id='buyButton2' onClick='buyShield()'' name='buy'>Acquire</button>"
+          document.getElementById('buyButton2').style.color = "#000000";
+          document.getElementById('buyButton3').innerHTML = "<button id='buyButton3' onClick='buyArmor()' name='buy'>Acquire</button>"
+          document.getElementById('buyButton3').style.color = "#000000";
+      }
+      loadStats();
+  }
+
+    function revertCheat() {
+      sessionStorage.setItem('item1', false);
+      sessionStorage.setItem('item2', false);
+      sessionStorage.setItem('item3', false);
+      document.getElementById('cheatButton').innerHTML = "<button onClick='cheat()'' name='cheat' class='cheatButton'>Instant Item Unlock</button>"
+      loadStats();
+    }
+
+
+  </script>
+
+
+</head>
+
+<body>
+
+  <div class="container" id="devContainer">
+
+  <h2>Mr Q Dev Mode</h2>
+  <div id="cheatButton"><button onClick="cheat()" name="cheat" class="cheatButton">Instant Item Unlock</button></div>
+
+  </div>
+
+  <div class="container" id="infoContainer">
+
+  <h1 id="statsTitle">Stats</h1>
+  <h2>Class: <h4 id="statsClass"></h4></h2>
+  <h2>Health Points: <h4 id="statsHp"></h4></h2>
+  <h2>Aptitude Points: <h4 id="statsAp"></h4></h2>
+  <h2>Items: </h2>
+
+  <div id="shopTable">
+
+  <table>
+    <tr>
+      <td id="slot1"></td>
+    </tr>
+    <tr>
+      <td id="slot2"></td>
+    </tr>
+    <tr>
+      <td id="slot3"></td>
+    </tr>
+  </table>
+
+  </div>
+
+  </div>
+
+  <div class="container" id="container5">
+
+    <button onClick="back()" value="Return" class="floatLeft">Return</button>
+
+    <h1>The Armory</h1>
+    <p>Hey there. My name is Banshee-44 and I’m the gunsmith around here. I hear you’ll need some serious kit to beat the Taken King. If you’ve got my three items, it’s happily yours.</p>
+
+    <div id="selectTable">
+
+    <table>
+      <tr>
+        <td><h3>Eternity's Edge Sword</h3></td>
+        <td><h3>Void Shield</h3></td>
+        <td><h3>Raid Armor</h3></td>
+      </tr>
+      <tr>
+        <td><img src="images/sword.jpg" height="180" alt="eternity's edge sword"></td>
+        <td><img src="images/shield.jpg" height="180" alt="the void shield"></td>
+        <td id="shopArmor"></td>
+      </tr>
+      <tr>
+        <td><img id="noImgBorder" src="images/arrow.png" height="40" alt="arrow pointing upwards"></td>
+        <td><img id="noImgBorder" src="images/arrow.png" height="40" alt="arrow pointing upwards"></td>
+        <td><img id="noImgBorder" src="images/arrow.png" height="40" alt="arrow pointing upwards"></td>
+      </tr>
+      <tr>
+        <td><img src="images/upgradeModule.png" height="100" alt="upgrade module"></td>
+        <td><img src="images/enhancementCore.jpg" height="100" alt="enhancement core"></td>
+        <td><img src="images/ascendantShard.png" height="100" alt="ascendant shard"></td>
+      </tr>
+      <tr>
+        <td><div id="buyButton1"><button onClick="buySword()" name="buy">Acquire</button></div></td>
+        <td><div id="buyButton2"><button id="buyButton2" onClick="buyShield()" name="buy">Acquire</button></div></td>
+        <td><div id="buyButton3"><button id="buyButton3" onClick="buyArmor()" name="buy">Acquire</button></div></td>
+      </tr>
+    </table>
+
+    </div>
+
+  </div>
+
+
+</body>
+
+</html>
